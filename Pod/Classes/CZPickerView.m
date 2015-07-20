@@ -284,14 +284,6 @@ typedef void (^CZDismissCompletionCallback)(void);
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
-    for(NSNumber *n in self.selectedRows){
-        if([n integerValue] == indexPath.row){
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-    }
-    if([self.selectedIndexPath isEqual:indexPath]){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
     if ([self.dataSource respondsToSelector:@selector(CZPickerView:attributedTitleForRow:)]) {
         cell.textLabel.attributedText = [self.dataSource CZPickerView:self attributedTitleForRow:indexPath.row];
     } else if([self.dataSource respondsToSelector:@selector(CZPickerView:titleForRow:)]){
@@ -347,6 +339,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     } else{
         cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
         cell.textLabel.textColor = [UIColor whiteColor];
+        self.lastSelectedCell = cell;
     }
 }
 
