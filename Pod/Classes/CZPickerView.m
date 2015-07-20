@@ -282,6 +282,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
+        cell.textLabel.font = [UIFont systemFontOfSize:12.5];
     }
     cell.accessoryType = UITableViewCellAccessoryNone;
     if ([self.dataSource respondsToSelector:@selector(CZPickerView:attributedTitleForRow:)]) {
