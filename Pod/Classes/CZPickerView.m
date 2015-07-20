@@ -9,7 +9,7 @@
 
 #define CZP_FOOTER_HEIGHT 44.0
 #define CZP_HEADER_HEIGHT 44.0
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
 #define CZP_BACKGROUND_ALPHA 0.9
 #else
 #define CZP_BACKGROUND_ALPHA 0.3
@@ -31,7 +31,8 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property NSIndexPath *selectedIndexPath;
 @property NSMutableArray *selectedRows;
 
-@property (nonatomic) UITableViewCell *lastHighlightedCell;
+@property (nonatomic) NSString *selectedCellText;
+@property (nonatomic) UITableViewCell *lastSelectedCell;
 
 @end
 
@@ -304,7 +305,9 @@ typedef void (^CZDismissCompletionCallback)(void);
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
     cell.textLabel.textColor = [UIColor whiteColor];
+    self.selectedCellText = cell.textLabel.text;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if(self.allowMultipleSelection){
         if(!self.selectedRows){
             self.selectedRows = [NSMutableArray new];
@@ -320,23 +323,30 @@ typedef void (^CZDismissCompletionCallback)(void);
         }
     }
     else {
-        if(self.selectedIndexPath){
-            UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
-            if(prevCell){
-                prevCell.accessoryType = UITableViewCellAccessoryNone;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            } else {
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            }
-        } else{
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+        if (![self.lastSelectedCell.textLabel.text isEqualToString:self.selectedCellText]) {
+            self.lastSelectedCell.backgroundColor = [UIColor whiteColor];
+            self.lastSelectedCell.textLabel.textColor = [UIColor blackColor];
+            self.lastSelectedCell = cell;
         }
+        
         self.selectedIndexPath = indexPath;
         if(!self.needFooterView && [self.delegate respondsToSelector:@selector(CZPickerView:didConfirmWithItemAtRow:)]){
             [self dismissPicker:^{
                 [self.delegate CZPickerView:self didConfirmWithItemAtRow:indexPath.row];
             }];
         }
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (![cell.textLabel.text isEqualToString:self.selectedCellText]) {
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+    } else{
+        cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
+        cell.textLabel.textColor = [UIColor whiteColor];
     }
 }
 
