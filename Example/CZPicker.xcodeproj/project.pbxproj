@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15424AF1FE1F8AE5B37E827E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7D80CA22DA28E87264B5A9 /* libPods.a */; };
+		3B385CC550159FA021F43493 /* libPods-CZPicker_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6E4554479664108A72E627 /* libPods-CZPicker_Example.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -21,7 +23,6 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		9757554B3CE3415237FF9CF4 /* libPods-CZPicker_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6E4554479664108A72E627 /* libPods-CZPicker_Example.a */; };
 		98D67F6F68BE60FEE95E833E /* libPods-CZPicker_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB42F7DB1EA50D8A4F8CDDF3 /* libPods-CZPicker_Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		1D6E4554479664108A72E627 /* libPods-CZPicker_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CZPicker_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F02BC7548E44F970FB0781E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F8AD11755DFEAFEF00F2F0 /* CZPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CZPicker.podspec; path = ../CZPicker.podspec; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CZPicker_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CZPicker_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,6 +66,7 @@
 		BA508FA47AA72D4978EE255C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C252059C4BC249573814D6B0 /* Pods-CZPicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CZPicker_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CZPicker_Example/Pods-CZPicker_Example.release.xcconfig"; sourceTree = "<group>"; };
 		EB42F7DB1EA50D8A4F8CDDF3 /* libPods-CZPicker_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CZPicker_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD7D80CA22DA28E87264B5A9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +77,8 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				9757554B3CE3415237FF9CF4 /* libPods-CZPicker_Example.a in Frameworks */,
+				15424AF1FE1F8AE5B37E827E /* libPods.a in Frameworks */,
+				3B385CC550159FA021F43493 /* libPods-CZPicker_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,9 +135,9 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				1F02BC7548E44F970FB0781E /* Pods.framework */,
 				1D6E4554479664108A72E627 /* libPods-CZPicker_Example.a */,
 				EB42F7DB1EA50D8A4F8CDDF3 /* libPods-CZPicker_Tests.a */,
+				FD7D80CA22DA28E87264B5A9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -486,6 +488,12 @@
 				GCC_PREFIX_HEADER = "CZPicker/CZPicker-Prefix.pch";
 				INFOPLIST_FILE = "CZPicker/CZPicker-Info.plist";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"UIKit\"",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -501,6 +509,12 @@
 				GCC_PREFIX_HEADER = "CZPicker/CZPicker-Prefix.pch";
 				INFOPLIST_FILE = "CZPicker/CZPicker-Info.plist";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					"\"UIKit\"",
+					"$(inherited)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

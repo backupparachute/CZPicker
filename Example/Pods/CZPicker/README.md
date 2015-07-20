@@ -1,15 +1,53 @@
-//
-//  CZPickerView.h
-//
-//  Created by chenzeyu on 9/6/15.
-//  Copyright (c) 2015 chenzeyu. All rights reserved.
-//
+# CZPicker
 
-#import <UIKit/UIKit.h>
+[![CI Status](http://img.shields.io/travis/chenzeyu/CZPicker.svg?style=flat)](https://travis-ci.org/chenzeyu/CZPicker)
+[![Version](https://img.shields.io/cocoapods/v/CZPicker.svg?style=flat)](http://cocoapods.org/pods/CZPicker)
+[![License](https://img.shields.io/cocoapods/l/CZPicker.svg?style=flat)](http://cocoapods.org/pods/CZPicker)
+[![Platform](https://img.shields.io/cocoapods/p/CZPicker.svg?style=flat)](http://cocoapods.org/pods/CZPicker)
 
-@class CZPickerView;
+## Demo
+![](demo.gif)
 
-@protocol CZPickerViewDataSource <NSObject>
+## Change Log
+2 most recent changes are listed here.
+
+Full [change logs](CHANGELOG.md)
+
+### v0.3.4 - 2015-07-21
+
+#### Fixed
+- Fixed multiple selection mode cell selection not remembered issue. [#8](https://github.com/chenzeyu/CZPicker/issues/8)
+
+### v0.3.3 - 2015-07-20
+#### Fixed
+- Listen to orientation change when needed. (App supports landscape & portrait)
+- Animate picker only on supported orientations.
+
+## Usage
+
+CZPicker is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod "CZPicker"
+```
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+To show the picker, simply adding the following code:
+
+```objective-c
+CZPickerView *picker = [[CZPickerView alloc] initWithHeaderTitle:@"Fruits"
+                        cancelButtonTitle:@"Cancel"
+                        confirmButtonTitle:@"Confirm"];
+picker.delegate = self;
+picker.dataSource = self;
+[picker show];
+```
+and implement the dataSource and Delegate methods:
+
+```objective-c
+#prama mark - CZPickerViewDataSource
 
 @required
 /* number of items for picker */
@@ -30,46 +68,28 @@
 - (NSString *)CZPickerView:(CZPickerView *)pickerView
                             titleForRow:(NSInteger)row;
 
-@end
 
-@protocol CZPickerViewDelegate <NSObject>
 
+#prama mark - CZPickerViewDelegate
 @optional
-
 /** delegate method for picking one item */
 - (void)CZPickerView:(CZPickerView *)pickerView
           didConfirmWithItemAtRow:(NSInteger)row;
 
-/*
- delegate method for picking multiple items,
+/** delegate method for picking multiple items,
  implement this method if allowMultipleSelection is YES,
  rows is an array of NSNumbers
  */
 - (void)CZPickerView:(CZPickerView *)pickerView
           didConfirmWithItemsAtRows:(NSArray *)rows;
-
 /** delegate method for canceling */
 - (void)CZPickerViewDidClickCancelButton:(CZPickerView *)pickerView;
-@end
+```
 
-@interface CZPickerView : UIView<UITableViewDataSource, UITableViewDelegate>
+## Customization
+There are a lot of things can be customized, change the following properties to customize the picker of your own:
 
-/** Initialize the picker view with titles
- @param headerTitle The title of header
- @param cancelButtonTitle The title for cancelButton
- @param confirmButtonTitle The title for confirmButton
- */
-- (id)initWithHeaderTitle:(NSString *)headerTitle
-        cancelButtonTitle:(NSString *)cancelButtonTitle
-       confirmButtonTitle:(NSString *)confirmButtonTitle;
-
-/** show the picker */
-- (void)show;
-
-@property id<CZPickerViewDelegate> delegate;
-
-@property id<CZPickerViewDataSource> dataSource;
-
+```objective-c
 /** whether to show footer (including confirm and cancel buttons), default NO */
 @property BOOL needFooterView;
 
@@ -103,5 +123,18 @@
 
 /** picker confirm button highlighted state color */
 @property (nonatomic, strong) UIColor *confirmButtonHighlightedColor;
+```
 
-@end
+
+
+## Author
+
+chenzeyu, zeyufly@gmail.com
+
+## License
+
+CZPicker is available under the MIT license. See the LICENSE file for more info.
+
+## Credits
+
+CZPicker is created at and supported by [Fooyo.sg](http://fooyo.sg)

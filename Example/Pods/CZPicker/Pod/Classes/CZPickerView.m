@@ -30,9 +30,6 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property UITableView *tableView;
 @property NSIndexPath *selectedIndexPath;
 @property NSMutableArray *selectedRows;
-
-@property (nonatomic) UITableViewCell *lastHighlightedCell;
-
 @end
 
 @implementation CZPickerView
@@ -302,8 +299,6 @@ typedef void (^CZDismissCompletionCallback)(void);
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
-    cell.textLabel.textColor = [UIColor whiteColor];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(self.allowMultipleSelection){
         if(!self.selectedRows){
