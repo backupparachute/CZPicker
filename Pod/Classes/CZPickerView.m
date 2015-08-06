@@ -296,7 +296,7 @@ typedef void (^CZDismissCompletionCallback)(void);
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
+    cell.backgroundColor = self.selectedCellHighlightedColor;
     cell.textLabel.textColor = [UIColor whiteColor];
     self.selectedCellText = cell.textLabel.text;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -338,7 +338,7 @@ typedef void (^CZDismissCompletionCallback)(void);
         cell.backgroundColor = [UIColor whiteColor];
         cell.textLabel.textColor = [UIColor blackColor];
     } else{
-        cell.backgroundColor = [UIColor colorWithRed:0.44 green:0.65 blue:0.79 alpha:1];
+        cell.backgroundColor = self.selectedCellHighlightedColor;
         cell.textLabel.textColor = [UIColor whiteColor];
         self.lastSelectedCell = cell;
     }

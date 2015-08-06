@@ -104,4 +104,6 @@
 /** picker confirm button highlighted state color */
 @property (nonatomic, strong) UIColor *confirmButtonHighlightedColor;
 
+@property (nonatomic, strong) UIColor *selectedCellHighlightedColor;
+
 @end
