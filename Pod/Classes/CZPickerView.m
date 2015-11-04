@@ -307,12 +307,7 @@ typedef void (^CZDismissCompletionCallback)(void);
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIdentifier];
     }
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    for(NSIndexPath *ip in self.selectedIndexPaths){
-        if(ip.row == indexPath.row){
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-    }
+    
     if ([self.dataSource respondsToSelector:@selector(czpickerView:attributedTitleForRow:)]) {
         cell.textLabel.attributedText = [self.dataSource czpickerView:self attributedTitleForRow:indexPath.row];
     } else if([self.dataSource respondsToSelector:@selector(czpickerView:titleForRow:)]){
@@ -324,8 +319,6 @@ typedef void (^CZDismissCompletionCallback)(void);
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = self.selectedCellHighlightedColor;
-    cell.textLabel.textColor = [UIColor whiteColor];
     self.selectedCellText = cell.textLabel.text;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -339,21 +332,29 @@ typedef void (^CZDismissCompletionCallback)(void);
         if([self.selectedIndexPaths containsObject:indexPath]){
             [self.selectedIndexPaths removeObject:indexPath];
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor blackColor];
         } else {
             [self.selectedIndexPaths addObject:indexPath];
+            cell.backgroundColor = self.selectedCellHighlightedColor;
+            cell.textLabel.textColor = [UIColor whiteColor];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             cell.tintColor = self.checkmarkColor;
         }
         
     } else { //single selection mode
         
+        cell.backgroundColor = self.selectedCellHighlightedColor;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        
         if (self.selectedIndexPaths.count > 0){// has selection
             NSIndexPath *prevIp = (NSIndexPath *)self.selectedIndexPaths[0];
             UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:prevIp];
             if(indexPath.row != prevIp.row){ //different cell
+                prevCell.backgroundColor = [UIColor whiteColor];
+                prevCell.textLabel.textColor = [UIColor blackColor];
                 prevCell.accessoryType = UITableViewCellAccessoryNone;
-                cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                cell.tintColor = self.checkmarkColor;
+                cell.accessoryType = UITableViewCellAccessoryNone;
                 [self.selectedIndexPaths removeObject:prevIp];
                 [self.selectedIndexPaths addObject:indexPath];
             } else {//same cell
@@ -362,8 +363,7 @@ typedef void (^CZDismissCompletionCallback)(void);
             }
         } else {//no selection
             [self.selectedIndexPaths addObject:indexPath];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            cell.tintColor = self.checkmarkColor;
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
         
         if (![self.lastSelectedCell.textLabel.text isEqualToString:self.selectedCellText]) {
@@ -383,14 +383,15 @@ typedef void (^CZDismissCompletionCallback)(void);
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (![cell.textLabel.text isEqualToString:self.selectedCellText]) {
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.textLabel.textColor = [UIColor blackColor];
-    } else{
+    if ([self.selectedIndexPaths containsObject:indexPath]) {
         cell.backgroundColor = self.selectedCellHighlightedColor;
         cell.textLabel.textColor = [UIColor whiteColor];
-        self.lastSelectedCell = cell;
+        if (self.allowMultipleSelection) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.tintColor = self.checkmarkColor;
+        }
     }
+
 }
 
 #pragma mark - Notification Handler
